@@ -17,10 +17,7 @@
 <body>
     @include('includes.header')
     <main class="all main_profile myprofile">
-        <div>
-            <button class="myProfile_button">Мой профиль</button>
-            <button class="myOrders_button">Мои заказы</button>
-        </div>
+        @include('includes.navbar_profile')
         <nav>
             <h1 class="h1_Myprofile">Мой профиль</h1>
             <div>

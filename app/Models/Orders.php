@@ -5,12 +5,19 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Orders extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $table = 'orders';
     protected $guarded = false;
+
+    const ORDER_BEING_COLLECTED = 0;
+    const ORDER_IN_THE_WAY = 1;
+    const ORDER_READY = 2;
+    const ORDER_COMPLETED = 3;
+    const ORDER_CANCELLED = 4;
 
     public function orderList()
     {

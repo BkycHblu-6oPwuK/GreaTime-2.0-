@@ -10,8 +10,11 @@ class IndexController extends Controller
 {
     public function __invoke(Products $product)
     {
-        $review = $product->review;
+        $reviews = $product->review()->get();
+        foreach($reviews as $key => $rev){
+            $reviews[$key]['date'] = $rev->getCreatedAtFormatted();
+        }
         $user = $product->user;
-        return response()->json(['reviews' => $review,'users' => $user]);
+        return response()->json(['reviews' => $reviews,'users' => $user]);
     }
 }

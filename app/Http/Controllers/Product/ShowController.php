@@ -11,6 +11,7 @@ class ShowController extends Controller
     public function __invoke(Products $product)
     {
         $products = Products::all()->where('amount','!=',0)->take(12);
-        return view('catalog.show', compact('products','product'));
+        $gallary = $product->gallary;
+        return view('catalog.show', compact('products','product','gallary'));
     }
 }

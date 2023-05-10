@@ -1,4 +1,4 @@
-<div class="{{ $name }}">
+<div class="{{ $name }} card_product">
     <form method="POST" class="form_add_fav img_heart_tovar">
         <button type="submit" class="button_heart_tovar" name="heart_tov"><img
                 src="{{ asset('img/icons/сердце-100.png') }}" alt=""></button>
@@ -6,7 +6,7 @@
     </form>
     <a href="{{ route('product.show',$product->id) }}">
         <div class="img_popular_tovar">
-            <picture><img src="{{ asset('img/products/' . $product->name . '/' . $product->image . '') }}"
+            <picture><img src="{{ asset('storage/' . $product->image . '') }}"
                     alt="">
             </picture>
         </div>
@@ -21,7 +21,6 @@
                 @csrf
                 <div class="price">
                     <p class="p_price">{{ $product->price }}</p>
-                    <img class="img_rub" src="{{ asset('img/popular tovar/XMLID 449.png') }}" alt="">
                 </div>
                 @if ($product->sizes->count() > 0)
                     <input type="hidden" name="size" value="{{ $product->sizes[0]->size }}">

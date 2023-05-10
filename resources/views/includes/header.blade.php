@@ -22,9 +22,13 @@
         </div>
         <div class="logo">
             <a href="{{ route('main.index') }}"><h1 class="h_logo">GreaTime</h1></a>
+            @auth
+            @if (auth()->user()->status == 1)
             <div class="admin">
-                <p><a class="a_admin" href="admin.php">Админ панель</a></p>
+                <p><a class="a_admin" href="{{ route('admin.index') }}">Админ панель</a></p>
             </div>
+            @endif
+            @endauth
         </div>
         <div class="about_us">
             <div class="about_company"><a href="{{ route('about.index') }}">О компании</a></div>
@@ -43,14 +47,14 @@
                     </ul>
                 </div>
                 <div class="menu_fulter_right">
-                    <div class="menu_content">
+                    {{-- <div class="menu_content">
                         <ul class="menu menu_sub">
-                            {{-- <li class="menu_item_sub"><div><a class="menu_link link_sub" href="#">подкатегория</a></div></li>
+                            <li class="menu_item_sub"><div><a class="menu_link link_sub" href="#">подкатегория</a></div></li>
                             <ul class="menu menu_sub_sub">
                                 <li class="menu_item_sub_sub"><a class="menu_link link_sub_sub" href="#"><span>подкатегория</span></a></li>
-                            </ul> --}}
+                            </ul>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

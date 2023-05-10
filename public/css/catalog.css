@@ -43,17 +43,43 @@ select{
 .filters_brand_form{
     display: flex;
     flex-direction: column;
-    padding-right: 20px;
+    padding: 0 10px;
+    margin-top: 2px;
 }
-.filters_brand_form > div{
-    margin-bottom: 15px;
+.filters_brand_form > div,.filters_brand_form > section{
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
+}
+.filters_brand_form .filters_name.active:before{
+    position: absolute;
+    content: '';
+    background-image: url(../img/icons/pngwing.png);
+    rotate: -90deg;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 25.5%;
+}
+.filters_brand_form .filters_name.hide:before{
+    position: absolute;
+    content: '';
+    background-image: url(../img/icons/pngwing.png);
+    rotate: 90deg;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 21%;
 }
 .filters_name{
     display: flex;
     align-items: center;
+    position: relative;
     cursor: pointer;
+    margin-bottom: 5px;
+    padding: 0 0 0 5px;
 }
 .filters_name:hover{
     background-color: #e1e1e1;
@@ -328,15 +354,26 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 .button_apply_filers{
     height: 40px;
     background: #4174CB;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 16px;
     border: none;
     border: 1px solid #4174CB;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
+    font-weight: 600;
     color: white;
 }
-
+.button_close_filers{
+    height: 40px;
+    background: #ffffff;
+    font-size: 16px;
+    line-height: 16px;
+    border: 1px solid #4174CB;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #4174CB;
+}
 .fav_tov{
     margin-top: 10px;
 }

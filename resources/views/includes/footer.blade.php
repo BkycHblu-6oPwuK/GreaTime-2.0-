@@ -89,5 +89,7 @@
 <script src="{{ asset('plagins/jquery-ui/external/jquery/jquery.js') }}"></script>
 <script src="{{ asset('plagins/jquery-ui/jquery-ui.js') }}"></script>
 <script src="{{ asset('scripts/slider.js') }}"></script>
-<script src="{{ asset('scripts/script.js') }}"></script>
-<script src="{{ asset('scripts/login.js') }}"></script>
+<script type="module" src="{{ asset('scripts/script.js') }}"></script>
+<script type="module" src="{{ asset('scripts/login.js') }}"></script>
+<script src="{{ asset('plagins/Magnific-Popup-master/dist/jquery.magnific-popup.js') }}"></script>
+<script src="{{ asset('plagins/slick-master/slick/slick.js') }}"></script>

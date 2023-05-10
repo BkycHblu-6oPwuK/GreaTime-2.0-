@@ -10,7 +10,7 @@
                     <div class="status_my_order">{{ $order->shipping_methods }}</div>
                 @endif
             </div>
-            <form method="POST" action="{{ route('orders.canc.del',$order->id) }}" class="order_header_del_btn">
+            <form method="POST" action="{{ route('orders.canc.del', $order->id) }}" class="order_header_del_btn">
                 @csrf
                 @if ($order->status == 0 || $order->status == 1 || $order->status == 2)
                     <input type="submit" name="canc_order" class="btn_del_order" value="Отменить">
@@ -23,7 +23,7 @@
             <div class="images_products">
                 @foreach ($order->productsInOrders as $product)
                     <div class="image_product">
-                        <img src="{{ asset('img/products/' . $product->name . '/' . $product->image . '') }}"
+                        <img src="{{ asset('storage/' . $product->image . '') }}"
                             alt="">
                     </div>
                 @endforeach
@@ -57,12 +57,12 @@
         @foreach ($order->orderList as $item)
             <div class="order_body order_details_prod order_details">
                 <div class="image_product">
-                    <a href="#"><img
-                            src="{{ asset('img/products/' . $item->products->name . '/' . $item->products->image . '') }}"
+                    <a href="{{ route('product.show',$item->products->id) }}"><img
+                            src="{{ asset('storage/' . $item->products->image . '') }}"
                             alt=""></a>
                 </div>
                 <div class="order_product_desc">
-                    <div class="product_name"><a href="#">{{ $item->products->name }}</a></div>
+                    <div class="product_name"><a href="{{ route('product.show',$item->products->id) }}">{{ $item->products->name }}</a></div>
                     @if ($item->size != null)
                         <div class="product_num">
                             <span>Размер:</span>
@@ -75,20 +75,23 @@
                     </div>
                     @if (auth()->user()->reviews->contains('id_prod', $item->products->id))
                         <div class="product_rev">
-                            <a href="#">Изменить отзыв</a>
+                            <a href="{{ route('review.show',$item->products->id) }}">Изменить отзыв</a>
                         </div>
-                    @else
-                        @if ($order->status == 3)
-                            <div class="product_rev">
-                                <a href="#">Оставить отзыв</a>
-                            </div>
-                        @endif
-                    @endif
+                    @elseif (auth()->user()->completedOrders()->contains('id_product',$item->products->id))
+                        <div class="product_rev">
+                            <a href="{{ route('review.show',$item->products->id) }}">Оставить отзыв</a>
+                        </div>
+                    @elseif($order->status == 3)
+                        <div class="product_rev">
+                            <a href="{{ route('review.show',$item->products->id) }}">Оставить отзыв</a>
+                        </div>
+                     @endif
                 </div>
                 <div class="order_price_block">
                     <div class="order_price">Цена: {{ $item->amount * $item->priceInSalePromokode() }}</div>
                     <div class="order_number_prod"><span class="order_prod_amount">{{ $item->amount }}</span> шт. x
-                        <span class="order_prod_price">{{ $item->priceInSalePromokode() }}</span> ₽</div>
+                        <span class="order_prod_price">{{ $item->priceInSalePromokode() }}</span> ₽
+                    </div>
                 </div>
             </div>
         @endforeach

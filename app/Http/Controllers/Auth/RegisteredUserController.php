@@ -31,10 +31,20 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'alpha', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', Rules\Password::defaults(), 'confirmed'],
             'tel' => ['required', 'string', 'max:255','unique:'.User::class],
+        ], [
+            'name.required' => 'Поле имя является обязательным.',
+            'name.alpha' => 'Поле имя должно состоять только из букв',
+            'email.required' => 'Поле email является обязательным.',
+            'email.unique' => 'Пользователь с таким email уже зарегистрирован.',
+            'password.required' => 'Поле пароль является обязательным.',
+            'password.min' => 'Пароль должен состоять минимум из 8 символов',
+            'password.confirmed' => 'Пароль и его подтверждение не совпадают.',
+            'tel.required' => 'Поле телефон является обязательным.',
+            'tel.unique' => 'Пользователь с таким телефоном уже зарегистрирован.',
         ]);
 
         $user = User::create([

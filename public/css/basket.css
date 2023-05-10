@@ -113,7 +113,7 @@
     color: #4174CB;
     margin-right: 5px;
 }
-.tovar_basket_name>p{
+.tovar_basket_name>a>p{
     margin-top: 10px;
     white-space: normal;
 }

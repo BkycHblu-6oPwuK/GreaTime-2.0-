@@ -46,6 +46,7 @@ body{
     height: 100vh;
 }
 header{
+    min-width: 1180px;
     height: 193px;
     flex: 0 0 auto;
 }
@@ -455,6 +456,10 @@ button[name="heart_tovar"]>img,button[name="heart_tov"]>img{
     line-height: 28px;
     color: #333333;
 }
+.p_price::after,.tovar_price .haracter-blue::after{
+    position: absolute;
+    content: "₽";
+}
 .two_slider_button{
     margin-top: 170px;
     position: relative;
@@ -632,7 +637,7 @@ button[name="heart_tovar"]>img,button[name="heart_tov"]>img{
 /* end brends */
 
 footer{
-    width: 100%;
+    min-width: 1180px;
     height: 378px;
     background-color: #153E84;
     padding-top: 32px;
@@ -896,11 +901,11 @@ input{
     white-space: normal;
     font-family: 'GT Eesti Pro Display';
     font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
+    font-weight: 500!important;
+    font-size: 18px!important;
     line-height: 21px;
     text-align: start;
-    color: #ff0000;
+    color: #ff0000!important;
 }
 .err_log,.succ_log{
     display: none;
@@ -914,6 +919,11 @@ input{
     text-align: start;
     color: #ff0000;
 }
+#erconts{
+    font-weight: 500!important;
+    font-size: 18px!important;
+    line-height: 21px;
+}
 .succ_log{
     color: green!important;
 }
@@ -924,4 +934,17 @@ input{
 }
 .b-flex{
     display: flex;
+}
+textarea{
+    white-space: normal;
+}
+.a-btn{
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    background: #4174CB;
+}
+.sorting .active{
+    background: #1067fd;
 }

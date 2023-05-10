@@ -14,15 +14,16 @@ class ShowController extends BaseController
         if (is_array($id)) {
             $id = Arr::flatten($id);
             if (auth()->user() != null) {
-                auth()->user()->productsInFavourites()->sync($id);
-                $favourites = auth()->user()->favourites;
-                $id = [];
-                foreach ($favourites as $fav) {
-                    $id[] = $fav->id_product;
-                }
+                auth()->user()->productsInFavourites()->syncWithoutDetaching($id);
             }
         }
-
+        if (auth()->user() != null) {
+            $favourites = auth()->user()->favourites;
+            $id = [];
+            foreach ($favourites as $fav) {
+                $id[] = $fav->id_product;
+            }
+        }
         $products = $this->products->getProductFavourites($id);
         return response()->json($products);
     }

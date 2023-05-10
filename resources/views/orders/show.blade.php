@@ -18,10 +18,7 @@
 <body>
     @include('includes.header')
     <main class="all main_profile myorders">
-        <div>
-            <button class="myProfile_button">Мой профиль</button>
-            <button class="myOrders_button">Мои заказы</button>
-        </div>
+        @include('includes.navbar_profile')
         <section class="my_orders">
             <h1 class="h1_Myprofile">{{ $orders->count() > 0 ? 'Мои заказы' : 'У вас нет заказов' }}</h1>
             @foreach ($orders as $order)

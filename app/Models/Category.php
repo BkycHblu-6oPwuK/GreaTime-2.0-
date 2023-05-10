@@ -15,10 +15,18 @@ class Category extends Model
     {
         return $this->hasMany(Products::class,'id_category','id')->where('amount','!=',0);
     }
+    public function allProducts()
+    {
+        return $this->hasMany(Products::class,'id_category','id');
+    }
 
     public function subCategory()
     {
         return $this->hasMany(SubCategory::class,'id_category','id');
+    }
+    public function subSubCategory($id_sub_cat)
+    {
+        return SubSubCategory::where('id_category',$this->id)->where('id_sub_cat',$id_sub_cat)->get();
     }
 
     public function productsForSubcategory($id_sub_cat)

@@ -16,7 +16,7 @@ class PromokodeControllder extends Controller
         $buskets = auth()->user()->basket;
         $promokode = null;
         foreach ($buskets as $busket) {
-            $promokode = Promokode::where('id_product', $busket->id_product)->where('name', $request->name)->first();
+            $promokode = Promokode::where('id_product', $busket->id_product)->where('name', $request->name)->where('status',1)->first();
             if($promokode != null){
                 if($busket->id_promokode != $promokode->id){
                     $busket->update(['id_promokode' => $promokode->id]);

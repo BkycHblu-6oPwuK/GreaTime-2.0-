@@ -18,11 +18,15 @@ class SubCategory extends Model
 
     public function SubSubCategory()
     {
-        return $this->hasMany(SubSubCategory::class,'id_subcategory','id');
+        return $this->hasMany(SubSubCategory::class,'id_sub_cat','id');
     }
 
     public function products()
     {
         return $this->hasMany(Products::class,'id_sub_cat','id')->where('amount','!=',0);
+    }
+    public function Allproducts()
+    {
+        return $this->hasMany(Products::class,'id_sub_cat','id');
     }
 }

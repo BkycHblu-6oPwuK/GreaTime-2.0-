@@ -119,7 +119,6 @@ input::placeholder{
 
 .registration_form{
     width: 780px;
-    height: 518px;
     background: #FFFFFF;
     box-shadow: -4px 4px 14px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
@@ -129,7 +128,6 @@ input::placeholder{
 }
 .reg_form_left{
     width: 380px;
-    /* height: 454px; */
     background: #FFFFFF;
     box-shadow: 1px 0px 0px #8FAFE5;
 }
@@ -144,7 +142,6 @@ input::placeholder{
 }
 .form_reg{
     width: 352px;
-    height: 224px;
 }
 .login_button>.login_button_one{
     font-weight: 400;

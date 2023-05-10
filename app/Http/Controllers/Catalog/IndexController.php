@@ -14,7 +14,7 @@ class IndexController extends BaseController
     {
         $products = Products::query();
         if(count(request()->query()) > 1){
-            $products = $this->products->filter($products);
+            $products = $this->products->baseFilter($products);
         }
         $products = $products->paginate(6);
         $all_prod = Products::all();

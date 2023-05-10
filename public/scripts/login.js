@@ -1,4 +1,7 @@
-// // registration
+import { updateLocalStorageFavourites } from './script.js';
+
+// registration
+
 const erConts = document.querySelectorAll('#erconts');
 $('.form_reg > form').submit(function (e) {
     e.preventDefault();
@@ -11,15 +14,17 @@ $('.form_reg > form').submit(function (e) {
         processData: false,
         contentType: false,
         success: function (suc) {
+            console.log(suc)
             window.location.href = suc.redirect_url;
         },
         error: function (err) {
             if ('email' in err.responseJSON.errors) {
-                $("#erconts_email").show()
-                $('#erconts_email').html(err.responseJSON.errors['email'][0]);
-            } else {
-                $("#erconts_email").hide()
-                $('#erconts_email').empty();
+                console.log(err)
+                $("#erconts_email_reg").show()
+                $('#erconts_email_reg').html(err.responseJSON.errors['email'][0]);
+             }  else {
+                $("#erconts_email_reg").hide()
+                $('#erconts_email_reg').empty();
             }
             if ('tel' in err.responseJSON.errors) {
                 $("#erconts_tel").show()
@@ -67,6 +72,7 @@ $(".form_autorization").submit(function (e) {
         processData: false,
         contentType: false,
         success: function (suc) {
+            updateLocalStorageFavourites()
             window.location.href = suc.redirect_url;
         },
         error: function (err) {

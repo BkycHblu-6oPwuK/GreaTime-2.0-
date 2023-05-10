@@ -142,7 +142,8 @@
             <h1 class="price_h1">Оптовый прайс на почту</h1>
             <p class="price_p">В случае заинтересованности готовы направить вам прайс-лист с оптовыми ценами</p>
             <div class="send">
-                <form action="" class="form_email_push" method="post">
+                <form action="{{ route('main.mailing.store') }}" class="form_email_push" method="post">
+                    @csrf
                     <div class="send_price">
                         <input type="email" name="email" placeholder="Введите Ваш E-mail" required>
                     </div>
@@ -150,7 +151,9 @@
                         <input type="submit" name="send">
                     </div>
                 </form>
-                <div style="padding-bottom: 20px;" id="erconts"></div>
+                @error('email')
+                    <div style="padding-bottom: 20px;color:#e90000;" id="erconts">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="brends">

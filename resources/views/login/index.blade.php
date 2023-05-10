@@ -62,7 +62,7 @@
                         @csrf
                         <div>
                             <input name="email" class="reg_email" type="text" placeholder="Введите ваш E-mail" required>
-                            <span id="erconts_email" class="err_log"></span>
+                            <span id="erconts_email_reg" class="err_log"></span>
                         </div>
                         <div>
                             <input name="password" class="reg_password" type="text" placeholder="Введите ваш пароль" required>

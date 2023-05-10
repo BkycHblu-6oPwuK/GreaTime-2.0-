@@ -4,19 +4,24 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+    
+    const ADMIN_ROLE = 1;
+    const MODERATOR_ROLE = 2;
+    const USER_BANNED = 3;
+
     protected $guarded = false;
     protected $table = 'users';
     protected $fillable = [
@@ -81,5 +86,13 @@ class User extends Authenticatable
     public function productsInFavourites()
     {
         return $this->belongsToMany(Products::class,'favourites','id_user','id_product');
+    }
+    public function completedOrders()
+    {
+        $orderLists = OrderList::whereHas('orders', function ($query) {
+            $query->where('status', '=', 3)
+                  ->where('id_user', '=', $this->id);
+        })->get();
+        return $orderLists;
     }
 }

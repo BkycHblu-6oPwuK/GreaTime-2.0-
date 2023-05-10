@@ -67,13 +67,42 @@
                                 {{ request()->get('brand') !== null && in_array($brand, request()->get('brand')) ? 'checked' : '' }}
                                 >
                                 <!-- <span class="span_checbox"></span> -->
-                                <span class="span_name_filter">{{ $brand }}</span>
+                                <span class="span_name_filter">{{ $brand }}({{ isset($countProducts['brand'][$brand]) ? $countProducts['brand'][$brand] : '0' }})</span>
                             </label>
                         @endforeach
                     </div>
                 </div>
                 @endif
-                <button type="submit" class="button_apply_filers">применить</button>
+                @if (isset($name_char))
+                @foreach ($name_char as $char)
+                <div class="filters_block">
+                    <div class="filters_name "><span class="p_filters_brand_black">{{ $char->name }}</span></div>
+                    <label class="select_all_button">
+                        <input class="input_checbox" type="checkbox" name="" value="">
+                        <!-- <span class="span_checbox"></span> -->
+                        <span class="span_name_filter">Все</span>
+                    </label>
+                    <div class="filters_brand_input filters_input">
+                        @foreach ($characteristics as $characteristic)
+                        @if ($char->id === $characteristic->id_name_char)
+                            <label class="filter_input">
+                                <input class="input_checbox" type="checkbox" name="{{ $char->name_en . '[]' }}" value="{{ $characteristic->value }}"
+                                {{ request()->get($char->name_en) !== null && in_array($characteristic->value, request()->get($char->name_en)) ? 'checked' : '' }}
+                                >
+                                <!-- <span class="span_checbox"></span> -->
+                                <span class="span_name_filter">
+                                    {{ $characteristic->value }}
+                                    ({{ isset($countProducts[$char->name_en][$characteristic->value]) ? $countProducts[$char->name_en][$characteristic->value] : '0' }})
+                                </span>
+                            </label>
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+                @endforeach
+                @endif
+                <section><button type="submit" class="button_apply_filers">Применить</button></section>
+                <section><button type="submit" class="button_close_filers">Сбросить</button></section>
             </form>
         </div>
         <div class="right_catalog">
