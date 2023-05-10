@@ -1102,7 +1102,7 @@ function updateLocalStorageFavourites() {
             if (response.length < localStorageIdArray.length) {
                 uploadFav() // если в localstorage товаров больше, то обновляем таблицу избранного у этого пользователя
             }
-            //   // Сравнить массивы и обновить localStorage при необходимости
+           // Сравнить массивы и обновить localStorage при необходимости
             if (!arraysEqual(localStorageIdArray, response)) {
                 localStorage.setItem('idArray', JSON.stringify(response));
                 localStorageIdArray = response;
