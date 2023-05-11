@@ -501,7 +501,7 @@ $('.twoButton > button').click(function () {
 })
 $('.button_visibleDesc').click(function () {
     $('.tovar_description').css({
-        "display": "flex"
+        "display": "block"
     });
 })
 $('.button_visibleHar').click(function () {
