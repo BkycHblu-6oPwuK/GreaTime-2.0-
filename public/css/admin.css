@@ -10,3 +10,7 @@ select.form-control[multiple]{
     right: 6px;
     top: -20px;
 }
+
+.breadcrumb{
+    justify-content: flex-end;
+}
