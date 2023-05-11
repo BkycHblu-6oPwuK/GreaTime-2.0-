@@ -42,7 +42,7 @@ $(document).off('change', '.subcategory_select').on('change', '.subcategory_sele
                 $('.subcategory_2').empty()
                 if (data.length > 0) {
                     $('.subcategory_2').append('<label>Подкатегории</label>')
-                    $('.subcategory_2').append('<select class="form-control subcategory_2_select" name="id_sub_cat"></select>')
+                    $('.subcategory_2').append('<select class="form-control subcategory_2_select" name="id_sub_sub_cat"></select>')
                     $('.subcategory_2_select').append('<option selected disabled>Выберите подкатегорию</option>')
                     $('.subcategory_2_select').append('<option value="">Без подкатегории</option>')
                     for (let i = 0; i < data.length; i++) {
