@@ -249,7 +249,8 @@ function setSubCategory(e) {
     });
 }
 // функция для вывода "подкатегорий подкатегорий"
-function setSubSubCategory(data) {
+function setSubSubCategory(data){
+    console.log(data);
     let categories = data[0]; // Получаем массив подкатегорий
     let subcategories = data[1]; // Получаем массив подкатегорий подкатегорий
     for (let i = 0; i < categories.length; i++) {
