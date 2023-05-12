@@ -230,6 +230,7 @@ function setSubCategory(e) {
     $.ajax({
         url: "/category/" + th + "",
         success: function (data) {
+            console.log(data)
             let i = 0
             let a = 0;
             $('.menu_fulter_right').empty();
