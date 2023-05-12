@@ -230,7 +230,6 @@ function setSubCategory(e) {
     $.ajax({
         url: "/category/" + th + "",
         success: function (data) {
-            console.log(data)
             let i = 0
             let a = 0;
             $('.menu_fulter_right').empty();
@@ -246,13 +245,11 @@ function setSubCategory(e) {
             }
         },
         error: function (data) {
-            console.log(data);
         }
     });
 }
 // функция для вывода "подкатегорий подкатегорий"
 function setSubSubCategory(data){
-    console.log(data);
     let categories = data[0]; // Получаем массив подкатегорий
     let subcategories = data[1]; // Получаем массив подкатегорий подкатегорий
     for (let i = 0; i < categories.length; i++) {
