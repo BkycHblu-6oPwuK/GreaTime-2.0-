@@ -246,6 +246,7 @@ function setSubCategory(e) {
             }
         },
         error: function (data) {
+            console.log(data);
         }
     });
 }

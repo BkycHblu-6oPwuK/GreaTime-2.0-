@@ -20,6 +20,7 @@ class ShowController extends Controller
                 unset($subCategories[$key]);
             }
         }
+        $subCategories =  $subCategories->values();
 
         foreach($subCategories as $subCategory){
             $subSubCategory[] = $subCategory->SubSubCategory;
@@ -32,6 +33,8 @@ class ShowController extends Controller
                 unset($subSubCategory[$key]);
             }
         }
+        
+        $subSubCategory = array_values($subSubCategory);
         return response()->json([$subCategories,$subSubCategory]);
     }
 }
