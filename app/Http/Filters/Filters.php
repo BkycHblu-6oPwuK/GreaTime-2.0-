@@ -42,44 +42,51 @@ class Filters
         $nameChar = collect($nameChar);
         $nameChar = $nameChar->flatten()->unique('name')->values();
         foreach($nameChar as $key => $name){
-            $count = Characteristic::whereIn('id_product',$products->pluck('id')->toArray())->where('id_name_char',$name->id)->count();
+            $count = Characteristic::whereIn('id_product',$products->pluck('id')->toArray())->where('id_name_char',$name->id)->get()->unique('value')->count();
             if($count < 2){
                 unset($nameChar[$key]);
             }
         }
+        $nameChar = $nameChar->values();
         return $nameChar;
     }
 
     public function filter($products, $request)
     {
-        unset($request['sorting'], $request['min_price'], $request['max_price'], $request['brand']);
+        unset($request['sorting'], $request['min_price'], $request['max_price'], $request['brand'],$request['page']);
         $products = $products->get();
         $nameChar = collect();
         $value = [];
-        foreach ($request as $key => $char) {
+
+        foreach ($request as $key => $charValues) {
             $nameChar->push(NameCharacteristic::where('name_en', $key)->first());
-            $value[] = $request[$key];
-        }
     
-        $productIds = Products::whereIn('id', $products->pluck('id')->toArray())
-        ->whereIn('id', function($query) use ($nameChar, $value) {
-            $query->select('id_product')
-                ->from('characteristic')
-                ->whereIn('id_name_char', $nameChar->pluck('id')->toArray())
-                ->where(function($q) use ($nameChar, $value) {
-                    foreach ($nameChar as $key => $name) {
-                        if ($name !== null) {
-                            $q->orWhere(function($query) use ($name, $value, $key) {
-                                $query->where('id_name_char', $name->id)
-                                    ->where('value', $value[$key]);
-                            });
-                        }
-                    }
-                });
-        })->pluck('id')->toArray();
-        $newProducts = Products::whereIn('id', $productIds);
-        
-        return $newProducts;
+            if (is_array($charValues)) {
+                $value = array_merge($value, $charValues);
+            } else {
+                $value[] = $charValues;
+            }
+        }
+        $characteristics = Characteristic::whereIn('id_product', $products->pluck('id')->toArray())
+            ->whereIn('id_name_char', $nameChar->pluck('id')->toArray())
+            ->whereIn('value', $value)
+            ->get();
+
+        $filteredProducts = $products->filter(function ($product) use ($nameChar, $value, $characteristics) {
+            foreach ($nameChar as $key => $char) {
+                $charac = $characteristics->where('id_product', $product->id)
+                    ->where('id_name_char', $char->id)
+                    ->whereIn('value', (array)$value);
+    
+                if ($charac->isEmpty()) {
+                    return false;
+                }
+            }
+            return true;
+        });
+        $filteredProducts = $filteredProducts->unique('id')->values();
+        $filteredProducts = Products::whereIn('id',$filteredProducts->pluck('id')->toArray());
+        return $filteredProducts;
     }
 
     public function CountProduct($products,$nameChar)

@@ -318,7 +318,7 @@ color: #828282;
 .catalog_bottom{
     width: 100%;
     display: flex;
-    margin: 32px 0 100px 0;
+    margin: 32px 0 100px 12px;
 }
 .catalog_bottom>a{
     margin-left: 20px;
