@@ -34,6 +34,7 @@
                     <div class="autorization_button">
                         <button type="submit" name="login">Войти на сайт</button>
                     </div>
+                    <div class="for"><a style="font-weight: 400" href="{{ route('password.request') }}">Забыли пароль?</a></div>
                 </form>
             </div>
         </div>

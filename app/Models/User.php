@@ -18,7 +18,6 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
-    
     const ADMIN_ROLE = 1;
     const MODERATOR_ROLE = 2;
     const USER_BANNED = 3;
