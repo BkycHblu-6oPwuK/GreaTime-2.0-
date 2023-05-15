@@ -7,7 +7,7 @@
                 <a href="#">Розничным покупателям</a>
                 <a href="#">Регистрация для юр.лиц</a>
                 <a href="#">Регистрация для физ.лиц</a> -->
-                <a href="{{ route('info.order') }}">Новости</a>
+                {{-- <a href="{{ route('info.order') }}">Новости</a> --}}
                 <a href="{{ route('info.order') }}">Как сделать заказ</a>
                 <a href="{{ route('info.delivery') }}">Доставка и оплата</a>
                 <a href="{{ route('info.refund') }}">Возврат</a>

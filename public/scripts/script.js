@@ -453,7 +453,6 @@ $(document).on('click', 'button[name="add_basket"]', function (e) {
         processData: false,
         contentType: false,
         success: function (data) {
-            console.log(data)
             if ('url' in data) {
                 window.location.href = data['url']
             }
@@ -484,7 +483,9 @@ $(document).on('click', 'button[name="add_basket"]', function (e) {
             }
         },
         error: function (data) {
-            console.log(data)
+            if(data.status === 403){
+                window.location.href = '/verify-email'
+            }
         }
     })
 })

@@ -53,10 +53,15 @@ class RegisteredUserController extends Controller
             'tel' => $request->tel,
             'password' => Hash::make($request->password),
         ]);
-
+        $user->sendEmailVerificationNotification();
         event(new Registered($user));
-
         Auth::login($user);
-        return response()->json(['redirect_url' => route('main.index')]);
+        if ($user->hasVerifiedEmail()) {
+            // User is authenticated and email is verified
+            return response()->json(['redirect_url' => route('main.index')]);
+        } else {
+            // Email is not verified, logout the user and redirect back to login page
+            return response()->json(['redirect_url' => route('verification.notice')]);
+        }
     }
 }

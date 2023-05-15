@@ -13,7 +13,6 @@ class CreateController extends Controller
     public function __invoke(Products $product)
     {
         if(auth()->user() != null){
-
             $data = [
                 'id_user' => auth()->user()->id,
                 'id_product' => $product->id,

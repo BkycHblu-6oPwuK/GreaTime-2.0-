@@ -26,10 +26,15 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-
+        
         $request->session()->regenerate();
-
-        return response()->json(['redirect_url' => route('main.index')]);
+        if ($request->user()->hasVerifiedEmail()) {
+            // User is authenticated and email is verified
+            return response()->json(['redirect_url' => route('main.index')]);
+        } else {
+            // Email is not verified, logout the user and redirect back to login page
+            return response()->json(['redirect_url' => route('verification.notice')]);
+        }
     }
 
     /**

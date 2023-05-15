@@ -14,12 +14,10 @@ $('.form_reg > form').submit(function (e) {
         processData: false,
         contentType: false,
         success: function (suc) {
-            console.log(suc)
-            window.location.href = suc.redirect_url;
+            window.location.href = suc['redirect_url']
         },
         error: function (err) {
             if ('email' in err.responseJSON.errors) {
-                console.log(err)
                 $("#erconts_email_reg").show()
                 $('#erconts_email_reg').html(err.responseJSON.errors['email'][0]);
              }  else {

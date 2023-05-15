@@ -83,6 +83,7 @@
                         <div class="registration_buttontwo">
                             <button type="submit" name="registration">Зарегистрироваться</button>
                         </div>
+                        <span id="erconts_email_verif" class="succ_log"></span>
                     </form>
                 </div>
             </div>

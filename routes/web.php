@@ -36,9 +36,9 @@ Route::group(['namespace' => 'About','prefix' => 'about'],function(){
     Route::get('/','IndexController')->name('about.index');
 });
 Route::group(['namespace' => 'Basket','prefix' => 'basket'],function(){
-    Route::get('/','IndexController')->middleware('auth')->name('basket.index');
+    Route::get('/','IndexController')->middleware(['auth','verified'])->name('basket.index');
     Route::get('/show','ShowController')->middleware('auth')->middleware('ajax')->name('basket.show');
-    Route::post('/{product}','CreateController')->middleware('auth')->middleware('ajax')->name('basket.create');
+    Route::post('/{product}','CreateController')->middleware(['auth','verified'])->middleware('ajax')->name('basket.create');
     Route::patch('/update/{busket}','UpdateController')->middleware('auth')->middleware('ajax')->name('basket.update');
     Route::delete('/delete/{busket}','DeleteController')->middleware('auth')->middleware('ajax')->name('basket.delete');
     Route::patch('/promokode','PromokodeControllder')->middleware('auth')->middleware('ajax')->name('basket.promokode.update');
@@ -65,15 +65,15 @@ Route::group(['namespace' => 'Info','prefix' => 'info'],function(){
     Route::get('/refund','RefundController')->name('info.refund');
     Route::get('/questions','QuestionsController')->name('info.questions');
 });
-Route::group(['namespace' => 'Orders','prefix' => 'orders','middleware' => 'auth'],function(){
+Route::group(['namespace' => 'Orders','prefix' => 'orders','middleware' => ['auth','verified']],function(){
     Route::get('/','IndexController')->name('orders.index');
     Route::post('/create','CreateController')->name('orders.create');
 });
-Route::group(['namespace' => 'MyOrders','prefix' => 'my_orders','middleware' => 'auth'],function(){
+Route::group(['namespace' => 'MyOrders','prefix' => 'my_orders','middleware' => ['auth','verified']],function(){
     Route::get('/','IndexController')->name('my_orders.index');
     Route::post('/{order}','CancDelController')->name('orders.canc.del');
 });
-Route::group(['namespace' => 'Profiler','prefix' => 'profiler','middleware' => 'auth'],function(){
+Route::group(['namespace' => 'Profiler','prefix' => 'profiler','middleware' => ['auth','verified']],function(){
     Route::get('/','IndexController')->name('profiler.index');
     Route::patch('/update/{user}','UpdateControllder')->name('profiler.update');
 });
@@ -82,13 +82,13 @@ Route::group(['namespace' => 'Review','prefix' => 'review'],function(){
     Route::get('/create/{product}','ShowController')->name('review.show');
     Route::post('/store/{product}','StoreController')->name('review.store');
 });
-Route::group(['namespace' => 'MyReviews','prefix' => 'my_reviews','middleware' => 'auth'],function(){
+Route::group(['namespace' => 'MyReviews','prefix' => 'my_reviews','middleware' => ['auth','verified']],function(){
     Route::get('/','IndexController')->name('my_reviews.index');
     Route::get('/get_reviews','GetReviewController')->middleware('ajax')->name('get_reviews.index');
     Route::delete('/delete/{review}','DeleteController')->middleware('ajax')->name('my_reviews.delete');
 });
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth','admin']], function(){
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth','verified','admin']], function(){
     Route::group(['namespace' => 'Main'], function(){
         Route::get('/','IndexController')->name('admin.index');
     });

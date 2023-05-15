@@ -948,3 +948,52 @@ textarea{
 .sorting .active{
     background: #1067fd;
 }
+
+.p-wrap{
+    white-space: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: #333333;
+}
+
+.verify_form{
+    max-width: 600px;
+    background: #FFFFFF;
+    box-shadow: -4px 4px 14px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 36px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: auto;
+}
+.verify_bottom{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+}
+.verify_bottom button {
+    font-size: 18px;
+    padding: 5px;
+    background: none;
+    border: 1px solid #1067fd;
+    outline: none;
+}
+.verify_bottom button:hover{
+    opacity: 1;
+    background-color:#4174CB;
+    border: 1px solid #333333;
+    color: white;
+}
+.succ_log_vis{
+    white-space: normal;
+    font-family: 'GT Eesti Pro Display';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    color: green;
+}
