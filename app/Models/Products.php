@@ -48,6 +48,23 @@ class Products extends Model
         return $this->hasMany(Characteristic::class,'id_product','id');
     }
 
+    public function characteristicForUsers($nameChar)
+    {
+        $uniqueNameChar = $nameChar->unique('name')->values();
+        $characteristic = collect();
+        foreach($uniqueNameChar as $key => $name){
+            $characteristic[] = Characteristic::where('id_product',$this->id)->where('id_name_char',$name->id)->get();
+            if($characteristic[$key]->count() > 1){
+                $value = $characteristic[$key]->implode('value',', ');
+                $characteristic[$key]['value'] = $value;
+            } else {
+                $characteristic[$key]['value'] = $characteristic[$key][0]->value;
+            }
+            $characteristic[$key]['name'] = $name->name;
+        }
+        return $characteristic;
+    }
+
     public function nameChar()
     {
         return $this->belongsToMany(NameCharacteristic::class,'characteristic','id_product','id_name_char');

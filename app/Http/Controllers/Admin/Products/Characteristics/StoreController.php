@@ -31,6 +31,7 @@ class StoreController extends BaseController
             [
                 'id_product' => $product->id,
                 'id_name_char' => $charModel->id,
+                'value' => $value,
             ], $data);
         }
         return redirect()->route('admin.product.show',$product->id);

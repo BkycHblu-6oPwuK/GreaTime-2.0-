@@ -37,7 +37,8 @@ select{
     font-size: 19px;
     line-height: 21px;
     color: #333333;
-    width: 340px;
+    width: 90%;
+    white-space: normal;
     padding: 20px 0 20px 0;
 }
 .filters_brand_form{
@@ -149,6 +150,7 @@ select{
 .span_name_filter{
     font-weight: 400;
     font-size: 17px;
+    white-space: normal;
 }
 /* .span_checbox{
     background: #fff;

@@ -136,12 +136,12 @@
                 <p>{!! $product->description !!}</p>
             </div>
             <div class="har">
-                @for ($i = 0; $i < $product->characteristic->count(); $i++)
+                    @foreach ($product->characteristicForUsers($product->nameChar) as $char)
                     <div class="har_left">
-                        <p>{{ $product->nameChar[$i]->name }}:</p>
-                        <p>{{ $product->characteristic[$i]->value }}</p>
+                        <p>{{ $char['name'] }}:</p>
+                        <p>{{ $char['value'] }}</p>
                     </div>
-                @endfor
+                    @endforeach
             </div>
             <div class="tovar_rev_block">
 
