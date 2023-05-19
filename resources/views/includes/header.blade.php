@@ -63,7 +63,7 @@
         <div class="search search_box">
             <form action="{{ route('catalog.index') }}" method="get">
                 <div class="pole_search">
-                    <input type="text" name="search" id="search" value="{{ request()->get('search') !== null ? request()->get('search') : '' }}" placeholder="Найти любимые товары" id="">
+                    <input type="text" name="search" required id="search" value="{{ request()->get('search') !== null ? request()->get('search') : '' }}" placeholder="Найти любимые товары" id="">
                 </div>
                 <div class="button_search">
                     <input type="submit" value="Найти">

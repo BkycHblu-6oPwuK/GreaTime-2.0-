@@ -55,7 +55,7 @@ class ShowController extends BaseController
         }
         $products = $this->products->baseFilter($products);
         $countProducts = $this->products->CountProduct($products,$name_char);
-        $products = $products->paginate(1);
+        $products = $products->paginate(15);
         return view('catalog.index', compact('products','name_char','brands','min_price','max_price','title','countProducts','characteristics'));
     }
 }
