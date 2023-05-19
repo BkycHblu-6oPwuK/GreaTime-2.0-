@@ -2,7 +2,7 @@
     $page = $paginator->currentPage();
     $str_pag = $paginator->lastPage();
     $filename = $paginator->path();
-    if (count(request()->query()) > 0) {
+    if (count(request()->query()) > 0 || request()->get('search')) {
         $params = array_filter(
             $_GET,
             function ($key) {
@@ -14,7 +14,7 @@
         $queryString = http_build_query(array_merge($params));
     }
 @endphp
-@if (count(request()->query()) > 1)
+@if (count(request()->query()) > 1 || request()->get('search'))
     <div class="catalog_bottom">
         <ul class="pagination">
             @if ($paginator->currentPage() == 1)

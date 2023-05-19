@@ -32,7 +32,7 @@ class Filters
         }
         return $products;
     }
-    public function getNameCharacteristic($products)
+    public function getNameCharacteristic($products,$minCountValueChars)
     {
         $products = $products->get();
         $nameChar = [];
@@ -43,7 +43,7 @@ class Filters
         $nameChar = $nameChar->flatten()->unique('name')->values();
         foreach ($nameChar as $key => $name) {
             $characteristics = Characteristic::whereIn('id_product', $products->pluck('id')->toArray())->where('id_name_char', $name->id)->get()->unique('value')->values();
-            if ($characteristics->count() < 2) {
+            if ($characteristics->count() < $minCountValueChars) {
                 unset($nameChar[$key]);
             }
             foreach($characteristics as $characteristic){
@@ -58,7 +58,7 @@ class Filters
 
     public function filter($products, $request)
     {
-        unset($request['sorting'], $request['min_price'], $request['max_price'], $request['brand'], $request['page']);
+        unset($request['page'],$request['sorting'], $request['min_price'], $request['max_price'], $request['brand'], $request['search']);
         $products = $products->get();
         $nameChar = collect();
         $value = [];

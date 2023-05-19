@@ -45,7 +45,7 @@ Route::group(['namespace' => 'Basket','prefix' => 'basket'],function(){
     Route::get('/check','CheckController')->middleware('ajax')->name('baskes.check');
 });
 Route::group(['namespace' => 'Catalog','prefix' => 'catalog'],function(){
-    Route::get('/','IndexController')->name('catalog.index');
+    Route::get('/','ShowController')->name('catalog.index');
     Route::get('/{category}','ShowController')->name('catalog.show.category');
     Route::get('/{category}/{subCategory}','ShowController')->name('catalog.show.subCategory');
     Route::get('/{category}/{subCategory}/{subSubCategory}','ShowController')->name('catalog.show.subSubCategory');

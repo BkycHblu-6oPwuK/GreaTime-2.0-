@@ -16,9 +16,19 @@ class ShowController extends BaseController
 {
     public function __invoke(Category $category,SubCategory $subCategory,SubSubCategory $subSubCategory,Request $request)
     {
+        $minCountValueChars = 2;
         if(isset($category->id)){
             $products = $category->products();
             $title = $category->name;
+        } else {
+            if($request->get('search')){
+                $products = Products::where('name', 'like', '%'.request()->get('search').'%');
+                $title = 'Товары соответствующие поиску';
+            } else {
+                $products = Products::where('amount','!=',0);
+                $title = 'Товары';
+                $minCountValueChars = 4;
+            }
         }
 
         if(isset($subCategory->id)){
@@ -35,17 +45,17 @@ class ShowController extends BaseController
         $min_price = $products->pluck('price')->min();
         $max_price = $products->pluck('price')->max();
        
-        $name_char = $this->products->getNameCharacteristic($products);
+        $name_char = $this->products->getNameCharacteristic($products,$minCountValueChars);
         $characteristics = $this->products->getValueChar($products,$name_char);
 
         $request = $request->collect();
-        $additionalParams = ['sorting', 'min_price', 'max_price', 'brand', 'page'];
+        $additionalParams = ['sorting', 'min_price', 'max_price', 'brand', 'page','search'];
         if ($request->except($additionalParams)->count() > 0) {
             $products = $this->products->filter($products, $request);
         }
         $products = $this->products->baseFilter($products);
         $countProducts = $this->products->CountProduct($products,$name_char);
-        $products = $products->paginate(15);
+        $products = $products->paginate(1);
         return view('catalog.index', compact('products','name_char','brands','min_price','max_price','title','countProducts','characteristics'));
     }
 }

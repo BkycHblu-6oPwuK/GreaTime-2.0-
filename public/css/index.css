@@ -852,6 +852,7 @@ footer{
     background: rgb(255 255 255);
     width: 630px;
     gap: 5px;
+    left: -9px;
     top: 42px;
     border-radius: 0 0 10px 10px;
     /* backdrop-filter: blur(15px); */

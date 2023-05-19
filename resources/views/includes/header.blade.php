@@ -61,16 +61,16 @@
         </div>
         <div class="presearch__overlay"></div>
         <div class="search search_box">
-            <form action="" method="post">
+            <form action="{{ route('catalog.index') }}" method="get">
                 <div class="pole_search">
-                    <input type="text" name="search" id="search" placeholder="Найти любимые товары" id="">
+                    <input type="text" name="search" id="search" value="{{ request()->get('search') !== null ? request()->get('search') : '' }}" placeholder="Найти любимые товары" id="">
                 </div>
-                <!-- <div class="button_search">
-                    <input type="submit" name="search" value="Найти">
-                </div> -->
+                <div class="button_search">
+                    <input type="submit" value="Найти">
+                </div> 
             </form>
             <div id="search_box-result"></div>
-        </div>
+        </div> 
         <div class="login">
             <div class="profile">
                 @auth

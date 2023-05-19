@@ -40,7 +40,12 @@
             </div>
             <input type="hidden" id="refresh" value="no">
             <form method="GET" class="filters_brand_form">
+                @if (request()->get('sorting') !== null)
                 <input type="hidden" name="sorting" class="sorting_input" value="{{ request()->get('sorting') !== null ? request()->get('sorting') : 'default' }}">
+                @endif
+                @if (request()->get('search') !== null)
+                    <input type="hidden" name="search" value="{{ request()->get('search') !== null ? request()->get('search') : '' }}">
+                @endif
                 <div class="filters_price">
                     <div class="filters_name"><span class="p_filters_brand_black">Цена</span></div>
                     <div class="input_price filters_checkbox">
